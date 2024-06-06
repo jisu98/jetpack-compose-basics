@@ -17,10 +17,14 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowDropDown
+import androidx.compose.material.icons.filled.ArrowDropUp
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.ElevatedButton
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -108,7 +112,7 @@ fun GreetingContents(
             name = name,
             expanded = expanded,
         )
-        ShowMoreButton(
+        ShowMoreIconButton(
             expanded = expanded,
             onClick = { expanded = !expanded },
         )
@@ -146,23 +150,26 @@ fun GreetingText(
 }
 
 @Composable
-fun ShowMoreButton(
+fun ShowMoreIconButton(
     modifier: Modifier = Modifier,
     expanded: Boolean,
     onClick: () -> Unit,
 ) {
-    ElevatedButton(
+    IconButton(
         modifier = modifier,
         onClick = onClick,
     ) {
-        Text(
-            text = stringResource(
-                if (expanded) {
-                    R.string.show_more
-                } else {
-                    R.string.show_less
-                }
-            )
+        Icon(
+            imageVector = if (expanded) {
+                Icons.Filled.ArrowDropUp
+            } else {
+                Icons.Filled.ArrowDropDown
+            },
+            contentDescription = if (expanded) {
+                stringResource(R.string.show_more)
+            } else {
+                stringResource(R.string.show_less)
+            },
         )
     }
 }
