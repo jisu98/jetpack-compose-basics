@@ -8,6 +8,7 @@ import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -24,7 +25,6 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -88,14 +88,18 @@ fun GreetingCards(
 
 @Composable
 fun GreetingCard(modifier: Modifier = Modifier, name: String) {
+    var expanded by rememberSaveable { mutableStateOf(false) }
+
     Card(
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier
+            .fillMaxWidth()
+            .clickable { expanded = !expanded },
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.primaryContainer,
             contentColor = MaterialTheme.colorScheme.primary,
         ),
     ) {
-        GreetingContents(name = name)
+        GreetingContents(name = name, expanded = expanded)
     }
 }
 
@@ -103,19 +107,15 @@ fun GreetingCard(modifier: Modifier = Modifier, name: String) {
 fun GreetingContents(
     modifier: Modifier = Modifier,
     name: String,
+    expanded: Boolean,
 ) {
-    var expanded by rememberSaveable { mutableStateOf(false) }
-
     Row(modifier = modifier.padding(24.dp)) {
         GreetingText(
             modifier = Modifier.weight(1f),
             name = name,
             expanded = expanded,
         )
-        ShowMoreIconButton(
-            expanded = expanded,
-            onClick = { expanded = !expanded },
-        )
+        ShowMoreIconButton(expanded = expanded)
     }
 }
 
@@ -150,25 +150,20 @@ fun GreetingText(
 fun ShowMoreIconButton(
     modifier: Modifier = Modifier,
     expanded: Boolean,
-    onClick: () -> Unit,
 ) {
-    IconButton(
+    Icon(
         modifier = modifier,
-        onClick = onClick,
-    ) {
-        Icon(
-            imageVector = if (expanded) {
-                Icons.Filled.ArrowDropUp
-            } else {
-                Icons.Filled.ArrowDropDown
-            },
-            contentDescription = if (expanded) {
-                stringResource(R.string.show_more)
-            } else {
-                stringResource(R.string.show_less)
-            },
-        )
-    }
+        imageVector = if (expanded) {
+            Icons.Filled.ArrowDropUp
+        } else {
+            Icons.Filled.ArrowDropDown
+        },
+        contentDescription = if (expanded) {
+            stringResource(R.string.show_more)
+        } else {
+            stringResource(R.string.show_less)
+        },
+    )
 }
 
 @Preview(
