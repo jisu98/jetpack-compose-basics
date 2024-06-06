@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">JetpackComposeBasics</string>
+
+    <string name="hello">Hello, </string>
+    <string name="show_more">Show more</string>
+    <string name="show_less">Show less</string>
 </resources>
