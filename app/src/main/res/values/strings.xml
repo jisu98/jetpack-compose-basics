@@ -4,4 +4,5 @@
     <string name="hello">Hello, </string>
     <string name="show_more">Show more</string>
     <string name="show_less">Show less</string>
+    <string name="dummy_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras eget lectus sit amet justo sagittis efficitur. Aliquam ac sollicitudin urna. In convallis non augue sed semper. Donec ultricies faucibus bibendum. Ut convallis turpis vel dolor hendrerit ultricies. Nullam eget lacinia justo, at cursus mauris. Curabitur vulputate diam et enim posuere vulputate sit amet vel felis. In lobortis porta nulla, sit amet condimentum velit consectetur convallis. Sed eget diam scelerisque, condimentum turpis vel, tempor dolor. In maximus fermentum pellentesque. Mauris laoreet sagittis ornare. Maecenas vel nibh commodo, luctus elit a, auctor urna. Nulla blandit justo felis, in condimentum lectus efficitur sed. Nullam at lacus metus. Ut condimentum tincidunt dolor.</string>
 </resources>

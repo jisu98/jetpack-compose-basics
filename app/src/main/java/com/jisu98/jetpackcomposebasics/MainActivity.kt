@@ -4,8 +4,8 @@ import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.Spring
-import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.spring
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -125,18 +125,12 @@ fun GreetingText(
     name: String,
     expanded: Boolean,
 ) {
-    val extraPadding by animateDpAsState(
-        targetValue = if (expanded) 24.dp else 0.dp,
-        label = "extraPaddingDpAnimation",
-        animationSpec = spring(
-            dampingRatio = Spring.DampingRatioMediumBouncy,
-            stiffness = Spring.StiffnessLow,
-        ),
-    )
-
     Column(
-        modifier = modifier.padding(
-            bottom = extraPadding.coerceAtLeast(0.dp),
+        modifier = modifier.animateContentSize(
+            animationSpec = spring(
+                dampingRatio = Spring.DampingRatioMediumBouncy,
+                stiffness = Spring.StiffnessMedium,
+            ),
         ),
     ) {
         Text(text = stringResource(R.string.hello))
@@ -146,6 +140,9 @@ fun GreetingText(
             ),
             text = name,
         )
+        if (expanded) {
+            Text(text = stringResource(id = R.string.dummy_text))
+        }
     }
 }
 
